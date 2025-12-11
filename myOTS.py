@@ -68,3 +68,33 @@ class LD_OTS:
         assert self.public, 'No public key available'
         # To be implemented
 
+        '''
+        d=mezuaren hasha
+        h(Si) sinaduraren hasha
+        Yi gako publikoa
+        '''
+
+        'mezua laburtu'
+        r=signature[0]
+        d=hashlib.sha256(r+message).digest()
+        'd zeharkatu'
+        for ibyte, byte in enumerate(d): 
+            'byte bakoitzeko bitak lortu'
+            bits = format(byte, 'b').zfill(8) 
+            'bitak zeharkatu'
+            for ibit, bit in enumerate(bits):
+                '''
+                if (bit=='0'):
+                    '0 -> h(Si) eta Y0 konparatu'
+                    if hashlib.sha256(signature[1 + ibyte*8 + ibit]).digest() != self.public[0][ibyte*8 + ibit]:
+                        return False
+                elif (bit=='1'):
+                    '1 -> h(Si) eta Y1 konparatu'
+                    if hashlib.sha256(signature[1 + ibyte*8 + ibit]).digest() != self.public[1][ibyte*8 + ibit]:
+                        return False
+                '''
+                'Errazago'
+                if hashlib.sha256(signature[1 + ibyte*8 + ibit]).digest() != self.public[int(bit)][ibyte*8 + ibit]:
+                        return False
+                
+        return True
